@@ -59,6 +59,16 @@ class MainTest {
         () -> assertDoesNotThrow(() -> Main.main(new String[]{"./sample-texts/empty.txt"}))
     );
   }
-
   // TODO: Create your test(s) below. /////////////////////////////////////////
+  @Test
+  void createBigram_SQLError() {
+    Connection db = Main.createConnection();
+    // Should create 3 words with the given string per comments above method.
+    assertDoesNotThrow(
+        () -> {
+          Main.createBigrams(db, "bz'vm.,bualkc snatoheu   s");
+          db.close();
+        }
+    );
+  }
 }
